@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Honey On The Hill — Mockup</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- ====== MOBILE HEADER (structure preserved) ====== -->
+  <header class="topbar">
+    <button class="iconBtn menuBtn" aria-label="Open menu" id="openMenu">
+      <span class="hamburger" aria-hidden="true"></span>
+    </button>
+
+    <div class="brand" aria-label="Honey On The Hill">
+      <!-- Placeholder: swap with their logo image if you have it -->
+      <div class="brandMark" aria-hidden="true">
+        <div class="brandCircle"></div>
+        <div class="brandBee">🐝</div>
+      </div>
+    </div>
+
+    <button class="iconBtn cartBtn" aria-label="Open cart" id="openCart">
+      <span class="cart" aria-hidden="true"></span>
+      <span class="cartCount" id="cartCount">1</span>
+    </button>
+
+    <div class="searchWrap">
+      <label class="srOnly" for="search">Search</label>
+      <input id="search" type="search" placeholder="Search..." />
+    </div>
+  </header>
+
+  <!-- ====== MENU OVERLAY (exact items preserved) ====== -->
+  <aside class="menuOverlay" id="menuOverlay" aria-hidden="true">
+    <button class="menuClose" aria-label="Close menu" id="closeMenu">×</button>
+
+    <nav class="menuNav" aria-label="Site navigation">
+      <a href="#home" class="menuLink">Home</a>
+      <span class="menuRule" aria-hidden="true"></span>
+      <a href="#about" class="menuLink">About Us</a>
+      <span class="menuRule" aria-hidden="true"></span>
+      <a href="#shop" class="menuLink">Shop Online</a>
+    </nav>
+  </aside>
+
+  <!-- ====== HERO CAROUSEL (structure preserved) ====== -->
+  <main id="home">
+    <section class="hero">
+      <div class="heroSlide" data-slide="0">
+        <img class="heroImg" src="assets/hero-1.jpg" alt="" />
+        <div class="heroOverlay">
+          <div class="heroTitle">SUPERFOOD<br/>HEROES</div>
+          <div class="heroDots" aria-hidden="true">
+            <span class="dot on"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="heroArrow left" aria-label="Previous slide" id="prevSlide">‹</button>
+      <button class="heroArrow right" aria-label="Next slide" id="nextSlide">›</button>
+    </section>
+
+    <!-- ====== SHOP (product card structure preserved) ====== -->
+    <section id="shop" class="shop">
+      <div class="productCard">
+        <div class="productFrame">
+          <img src="assets/product-1.jpg" alt="White Chocolate Honeycomb Candy" />
+        </div>
+
+        <h2 class="productTitle">White Chocolate Honeycomb Candy</h2>
+        <div class="productPrice">$18.00</div>
+
+        <button class="pillBtn disabled" type="button" disabled>Out of Stock</button>
+      </div>
+
+      <div class="badge">Brand New</div>
+      <div class="productCard">
+        <div class="productFrame">
+          <img src="assets/product-2.jpg" alt="EnergyBee" />
+        </div>
+
+        <h2 class="productTitle">EnergyBee</h2>
+        <div class="productPrice">$20.00</div>
+
+        <div class="qtyRow">
+          <button class="qtyBtn" type="button" aria-label="Decrease quantity">−</button>
+          <div class="qtyVal" aria-label="Quantity">1</div>
+          <button class="qtyBtn" type="button" aria-label="Increase quantity">+</button>
+        </div>
+
+        <button class="ctaBtn" type="button" id="addToCart">Add to Cart</button>
+      </div>
+
+      <div class="productCard">
+        <div class="productFrame">
+          <img src="assets/product-3.jpg" alt="Honey Pops" />
+        </div>
+
+        <h2 class="productTitle">Honey Pops</h2>
+        <div class="productPrice">$3.50</div>
+
+        <button class="pillBtn disabled" type="button" disabled>Out of Stock</button>
+      </div>
+    </section>
+
+    <!-- ====== ABOUT / CONTENT (structure preserved) ====== -->
+    <section id="about" class="about">
+      <div class="aboutButtons">
+        <button class="bigPill">Our Stores</button>
+        <button class="bigPill">Bees, Nucs, Packages</button>
+      </div>
+
+      <h2 class="aboutTitle">Our Story</h2>
+      <h3 class="aboutSub">Our Mission</h3>
+      <p class="aboutP">
+        At Honey On The Hill, we believe that bees are powerful creatures that contribute vastly to the world as we know it...
+      </p>
+
+      <h3 class="aboutSub">A Note from Our Founder</h3>
+      <blockquote class="founderNote">
+        “Honey On The Hill was built on the belief that honey should be responsibly-sourced in partnership with our bees...”
+      </blockquote>
+    </section>
+
+    <!-- ====== FOOTER (structure preserved) ====== -->
+    <footer class="footer">
+      <h2 class="connectTitle">CONNECT</h2>
+
+      <div class="socialRow" aria-label="Social links">
+        <a class="socialBtn" href="#" aria-label="Facebook">f</a>
+        <a class="socialBtn" href="#" aria-label="Instagram">⌁</a>
+      </div>
+
+      <div class="contactBlock">
+        <div class="tiny">Honey On The Hill 2021</div>
+        <div class="contactName">HONEY ON THE HILL</div>
+        <a class="contactLink" href="mailto:info@honeyonthehill.com">info@honeyonthehill.com</a>
+        <a class="contactLink" href="tel:+17068789982">706-878-9982</a>
+        <div class="contactLine">8600 N Main st</div>
+        <div class="contactLine">Helen, GA 30601</div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ====== SCROLL TO TOP (fix: moved higher/less intrusive) ====== -->
+  <button class="toTop" id="toTop" aria-label="Scroll to top">↑</button>
+
+  <!-- ====== CART DRAWER (simple) ====== -->
+  <aside class="cartDrawer" id="cartDrawer" aria-hidden="true">
+    <div class="cartHeader">
+      <div class="cartTitle">Cart</div>
+      <button class="cartClose" id="closeCart" aria-label="Close cart">×</button>
+    </div>
+
+    <div class="cartBody">
+      <div class="cartItem">
+        <div class="cartItemName">EnergyBee</div>
+        <div class="cartItemMeta">$20.00 • Qty 1</div>
+      </div>
+
+      <div class="cartSubtotal">
+        <span>Subtotal</span>
+        <span>$20.00</span>
+      </div>
+
+      <button class="ctaBtn" id="checkoutBtn" type="button">Checkout</button>
+      <div class="cartHint">Mockup checkout flow (for demonstration).</div>
+    </div>
+  </aside>
+
+  <!-- ====== CHECKOUT DESTINATION MODAL (FIXED: full address fields) ====== -->
+  <div class="modal" id="checkoutModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modalPanel">
+      <button class="modalClose" id="closeCheckout" aria-label="Close checkout">×</button>
+
+      <h2 class="modalTitle">Select your destination</h2>
+      <p class="modalSub">Where should we send the sweetness?</p>
+
+      <div class="field">
+        <label>Country</label>
+        <select>
+          <option>United States</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>State</label>
+        <select>
+          <option>Georgia</option>
+        </select>
+      </div>
+
+      <!-- ✅ FIX: FULL SHIPPING ADDRESS -->
+      <div class="field">
+        <label>Street Address</label>
+        <input type="text" placeholder="123 Main St" />
+      </div>
+
+      <div class="fieldRow">
+        <div class="field">
+          <label>City</label>
+          <input type="text" placeholder="Helen" />
+        </div>
+        <div class="field">
+          <label>Zip / Postal Code</label>
+          <input type="text" value="30552" />
+        </div>
+      </div>
+
+      <button class="updateBtn" type="button">Update</button>
+
+      <div class="modalNote">
+        This screen demonstrates the missing address fields fix while keeping the same flow.
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
