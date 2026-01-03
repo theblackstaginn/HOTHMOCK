@@ -41,24 +41,19 @@ body::before{
   pointer-events:none;
 }
 
-/* Page width */
-.site-header,
-.hero,
-.intro,
-.products,
-.site-footer{
-  width:min(980px, calc(100% - 36px));
-  margin-inline:auto;
-}
-
-/* Header */
+/* Header seal — truly centered to viewport */
 .site-header{
-  padding:24px 0 10px;
-  text-align:center;
+  position: relative;
+  width: 100%;
+  padding: 24px 0 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .site-seal{
-  width:clamp(170px, 38vw, 280px);
+  width: clamp(170px, 38vw, 280px);
+  height: auto;
+  margin: 0 auto;
 }
 
 /* Hero */
