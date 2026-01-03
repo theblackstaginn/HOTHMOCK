@@ -1,5 +1,9 @@
 /* ===========================
-   HOTH MOCK — FINAL
+   HOTH MOCK — SIMPLE FRAME
+   - Fixed honeycomb background
+   - No panels
+   - No image overlays
+   - Clean, handcrafted feel
    =========================== */
 
 :root{
@@ -7,9 +11,9 @@
   --ink:#2a241c;
   --muted:rgba(42,36,28,.7);
 
-  --shadow:0 12px 28px rgba(0,0,0,.12);
-
-  --frameInset:14%; /* single tuning knob */
+  --frame:#d9b86f;          /* warm honey-gold */
+  --frame-soft:#efe3c2;     /* light parchment */
+  --shadow:0 10px 22px rgba(0,0,0,.12);
 }
 
 /* Reset */
@@ -32,7 +36,7 @@ body::before{
   z-index:-2;
   background:url("hcomb-bg.PNG") repeat;
   background-size:520px auto;
-  opacity:.25;
+  opacity:.22;
   filter:saturate(1.15);
   pointer-events:none;
 }
@@ -84,7 +88,7 @@ body::before{
   box-shadow:0 8px 18px rgba(0,0,0,.08);
 }
 
-/* Products */
+/* Products grid */
 .products{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -99,39 +103,31 @@ body::before{
 }
 
 /* Product unit */
-.product{
+.product-card{
   text-align:center;
 }
 
-/* Frame */
+/* Simple handcrafted frame */
 .imgframe{
-  position:relative;
-  width:100%;
-  aspect-ratio:1/1;
+  padding:8px;
+  border-radius:20px;
+  background:linear-gradient(
+    180deg,
+    var(--frame-soft),
+    #fff
+  );
+  border:2px solid var(--frame);
+  box-shadow:var(--shadow);
 }
 
-/* Image fits frame window */
+/* Product image */
 .imgframe img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  padding:var(--frameInset);
+  border-radius:14px;
   background:#fff;
-  border-radius:18px;
-}
-
-/* Frame art */
-.imgframe::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:url("item-frame.PNG") center / contain no-repeat;
-  pointer-events:none;
-  z-index:2;
 }
 
 /* Titles */
-.product h3{
+.product-card h3{
   margin:10px 0 0;
   font-size:20px;
 }
