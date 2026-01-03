@@ -3,7 +3,7 @@
   --ink:#2a2418;
   --accent:#d4b256;
 
-  /* Must match your repo EXACTLY (case sensitive) */
+  /* Honeycomb texture (case-sensitive) */
   --texture: url("hcomb-bg.PNG");
 }
 
@@ -12,7 +12,18 @@
 html,body{
   margin:0;
   padding:0;
-  background:var(--bg);
+
+  /* FULL PAGE TEXTURE */
+  background:
+    linear-gradient(
+      rgba(251,246,233,.92),
+      rgba(251,246,233,.92)
+    ),
+    var(--texture);
+
+  background-repeat: repeat;
+  background-size: 320px 320px;
+
   color:var(--ink);
   font-family: Georgia, "Times New Roman", serif;
 }
@@ -25,7 +36,6 @@ html,body{
   text-align:center;
 }
 
-/* Keep seal present but not overpowering */
 .site-seal{
   width:96px;
   max-width:30vw;
@@ -36,31 +46,22 @@ html,body{
    HERO
    ========================= */
 .hero{
-  position:relative;
-
-  /* Honeycomb warmth behind hero */
-  background:
-    linear-gradient(rgba(255,255,255,.86), rgba(255,255,255,.86)),
-    var(--texture);
-
   padding: 1.25rem 0;
 }
 
-/* Subtle grounding rule under hero */
+/* grounding rule */
 .hero::after{
   content:"";
   display:block;
   width:min(820px, 92vw);
   height:1px;
   margin: 1.25rem auto 0;
-  background: rgba(42,36,24,.18);
+  background: rgba(42,36,24,.22);
 }
 
 .hero-image{
   display:block;
   width:100%;
-
-  /* Makes it actually feel like a hero banner */
   height: clamp(260px, 45vw, 420px);
   object-fit: cover;
 }
@@ -69,7 +70,6 @@ html,body{
    INTRO
    ========================= */
 .intro{
-  position:relative;
   max-width: 720px;
   margin: 0 auto;
   padding: 2rem 1.5rem 3rem;
