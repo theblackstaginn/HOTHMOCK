@@ -1,9 +1,10 @@
 /* ===========================
-   HOTH MOCK — style.css
+   HOTH MOCK — style.css (FIXED)
    - Scrollable page
    - Fixed honeycomb background (iOS-safe)
    - Seal + hero do NOT overlap
-   - Product images normalized + framed
+   - Product images normalized + framed (item-frame.PNG)
+   - Removes “whacky sizing” + ensures frame shows
    =========================== */
 
 :root{
@@ -18,8 +19,8 @@
   --radius: 22px;
 
   /* honeycomb texture control */
-  --hcombOpacity: .22;   /* increase slightly for prominence */
-  --hcombSaturate: 1.15; /* a touch more saturation */
+  --hcombOpacity: .26;   /* slightly more prominent */
+  --hcombSaturate: 1.18; /* a touch more saturation */
   --hcombContrast: 1.06;
   --hcombBlur: 0px;      /* keep crisp */
 }
@@ -27,6 +28,8 @@
 /* Basic reset */
 *{ box-sizing: border-box; }
 html, body{ height: 100%; }
+img{ max-width: 100%; height: auto; display:block; }
+
 body{
   margin: 0;
   color: var(--ink);
@@ -34,6 +37,7 @@ body{
   font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
   line-height: 1.35;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* Fixed background layer (does NOT scroll) */
@@ -48,6 +52,7 @@ body::before{
   opacity: var(--hcombOpacity);
   filter: saturate(var(--hcombSaturate)) contrast(var(--hcombContrast)) blur(var(--hcombBlur));
   pointer-events: none;
+  transform: translateZ(0); /* iOS paint stability */
 }
 
 /* Optional soft vignette / warmth */
@@ -83,8 +88,6 @@ body::after{
   display: inline-block;
   width: clamp(170px, 38vw, 280px);
   height: auto;
-  max-width: 100%;
-  image-rendering: auto;
 }
 
 /* Hero banner */
@@ -93,7 +96,6 @@ body::after{
 }
 
 .hero-image{
-  display: block;
   width: 100%;
   height: clamp(170px, 32vw, 300px);
   object-fit: cover;
@@ -143,50 +145,59 @@ body::after{
   backdrop-filter: blur(7px);
 }
 
-/* Image frame container */
+/* =========================================================
+   FIX: predictable image sizing + frame overlay always visible
+   - Make the frame area a square using aspect-ratio
+   - Crop/contain inside that square
+   - Draw item-frame.PNG on top (z-index)
+   ========================================================= */
+
 .imgframe{
   position: relative;
-  border-radius: 18px;
-  padding: 10px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.55));
-  border: 1px solid rgba(168,140,78,.30);
-  box-shadow: 0 10px 18px rgba(0,0,0,.10) inset;
-}
-
-/* Product image sizing fix (prevents "gigantic") */
-.imgframe img{
-  display: block;
   width: 100%;
-  height: auto;
-  max-height: 220px;
-  object-fit: contain;
+  aspect-ratio: 1 / 1;      /* keeps all product tiles consistent */
+  border-radius: 18px;
+  overflow: hidden;
+
+  /* subtle “card within card” */
   background: rgba(255,255,255,.92);
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,.10);
+  box-shadow:
+    inset 0 0 0 2px rgba(168,140,78,.22),
+    0 10px 18px rgba(0,0,0,.08);
 }
 
-/* Tiny cottagecore corner accents (CSS-only, smooth, not choppy) */
+/* Product image */
+.imgframe img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* clean icon-style crop */
+  border-radius: 18px;
+}
+
+/* Optional inner line */
 .imgframe::before{
   content:"";
-  position: absolute;
-  inset: 8px;
+  position:absolute;
+  inset: 10px;
   border-radius: 14px;
-  pointer-events: none;
-  border: 2px solid rgba(168,140,78,.22);
+  pointer-events:none;
+  border: 2px solid rgba(168,140,78,.18);
+  z-index: 2;
 }
 
-/* Real filigree frame overlay (root file: item-frame.PNG) */
+/* Filigree overlay frame (root file: item-frame.PNG) */
 .imgframe::after{
   content:"";
   position:absolute;
-  inset: 2px;                 /* slight inset so it hugs nicely */
+  inset: 0;
   pointer-events:none;
-  border-radius: 18px;
-  background: url("item-frame.PNG") center/contain no-repeat;
-  opacity: .92;               /* tune 0.85–1.0 */
+  background: url("item-frame.PNG") center / cover no-repeat;
+  opacity: .98;
+  z-index: 3;              /* ALWAYS on top */
   filter: saturate(1.05);
+  transform: translateZ(0); /* iOS paint stability */
 }
+
 /* Product titles */
 .product-card h3{
   margin: 12px 0 0;
