@@ -1,169 +1,265 @@
 /* =========================
-   ROOT VARIABLES
+   Honey On The Hill — Mockup
+   Files in repo root (case-sensitive):
+   - hcomb-bg.PNG
+   - hero-honey-spread.PNG
+   - seal-honey-on-the-hill.PNG
+   - product-energybee.jpg
+   - product-honeycomb-candy.jpg
+   - product-honeypops.jpg
+   - saw-honey.jpg
+   - bee-plush.jpg
    ========================= */
 
 :root{
-  --cream: #fbf6ea;
-  --honey: #e7c873;
-  --honey-dark: #c9a64d;
-  --ink: #2f2a24;
-  --muted: rgba(47,42,36,.7);
+  --bg: #fbf4e6;
+  --ink: #2a241a;
+  --muted: rgba(42,36,26,.70);
 
-  --bg-texture: url("hcomb-bg.PNG");
+  --honey: #caa12d;
+  --honey2: #e0c45a;
+
+  --card: rgba(255,255,255,.78);
+  --card2: rgba(255,255,255,.92);
+
+  --ring: rgba(152,120,38,.35);
+  --ring2: rgba(152,120,38,.18);
+
+  --shadow: 0 16px 40px rgba(0,0,0,.14);
+  --shadow2: 0 10px 22px rgba(0,0,0,.12);
+
+  --radius: 26px;
+  --radiusInner: 22px;
+
+  --max: 980px;
+
+  /* Background prominence controls */
+  --combOpacity: .38;     /* raise a bit if you want it louder */
+  --combSaturate: 1.18;   /* “more saturation” */
+  --combContrast: 1.05;
 }
 
-/* =========================
-   GLOBAL RESET
-   ========================= */
-
-*{
-  box-sizing: border-box;
-}
-
-html, body{
-  margin:0;
-  padding:0;
-  height:100%;
-}
-
+/* Reset / base */
+*{ box-sizing:border-box; }
+html, body{ height:100%; }
 body{
-  font-family: Georgia, "Times New Roman", serif;
+  margin:0;
   color: var(--ink);
+  background: var(--bg);
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+  overflow-x:hidden;
+}
 
-  /* FIXED HONEYCOMB BACKGROUND */
-  background:
-    linear-gradient(
-      rgba(251,246,234,.92),
-      rgba(251,246,234,.92)
-    ),
-    var(--bg-texture);
-
-  background-size: 320px 280px;
-  background-attachment: fixed;
+/* Fixed honeycomb background (does NOT scroll) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background-image: url("./hcomb-bg.PNG");
+  background-repeat: repeat;
+  background-size: 520px;          /* tweak if you want tighter/larger cells */
   background-position: center;
-
-  overflow-y: auto;
+  opacity: var(--combOpacity);
+  filter: saturate(var(--combSaturate)) contrast(var(--combContrast));
+  pointer-events:none;
+  z-index:-2;
 }
 
-/* =========================
-   LAYOUT
-   ========================= */
-
-main{
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+/* Soft vignette over the honeycomb so text stays readable */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(120% 85% at 50% 0%, rgba(255,255,255,.55), transparent 62%),
+    radial-gradient(110% 95% at 50% 100%, rgba(255,255,255,.45), transparent 65%),
+    radial-gradient(90% 60% at 50% 50%, transparent 55%, rgba(0,0,0,.08) 100%);
+  pointer-events:none;
+  z-index:-1;
 }
 
-section{
-  margin-bottom: 3rem;
-  text-align: center;
+/* Page wrapper */
+.wrap{
+  width: min(var(--max), calc(100% - 28px));
+  margin: 22px auto 60px;
 }
 
-/* =========================
-   HERO
-   ========================= */
+/* Top “seal” logo area */
+.brand{
+  display:flex;
+  justify-content:center;
+  padding: 18px 0 6px;
+}
 
+.brand img{
+  width: min(420px, 82vw);
+  height: auto;
+  display:block;
+  filter: drop-shadow(0 18px 26px rgba(0,0,0,.18));
+}
+
+/* Hero image (no overlap with logo) */
 .hero{
-  margin-bottom: 2.5rem;
+  margin: 18px auto 18px;
+  border-radius: 28px;
+  overflow:hidden;
+  box-shadow: var(--shadow);
+  background: rgba(255,255,255,.35);
 }
 
 .hero img{
-  width:100%;
-  height:auto;
-  border-radius: 18px;
+  width: 100%;
+  height: auto;
   display:block;
 }
 
-/* =========================
-   TEXT
-   ========================= */
+/* Intro copy panel */
+.lead{
+  margin: 18px auto 26px;
+  padding: 26px 22px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.62));
+  box-shadow: var(--shadow2);
+  border: 1px solid rgba(152,120,38,.16);
+  text-align:center;
+}
 
-p{
-  font-size: 1.05rem;
+.lead p{
+  margin:0;
+  font-size: clamp(18px, 2.2vw, 26px);
   line-height: 1.55;
-  color: var(--muted);
-  max-width: 36ch;
-  margin: 1.25rem auto;
+  color: rgba(42,36,26,.86);
+  letter-spacing: .2px;
 }
 
-h2{
-  font-weight: normal;
-  margin-top: .75rem;
+/* Product grid */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 18px;
 }
 
-/* =========================
-   PRODUCT GRID
-   ========================= */
-
-.products{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+@media (max-width: 940px){
+  .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px){
+  .grid{ grid-template-columns: 1fr; }
 }
 
-/* =========================
-   TRUE FILIGREE FRAME
-   ========================= */
+/* Product card */
+.card{
+  border-radius: 30px;
+  padding: 18px 16px 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.58));
+  border: 1px solid rgba(152,120,38,.16);
+  box-shadow: var(--shadow2);
+}
 
-.imgframe{
+/* “Cottagecore frame” that is actually attached to the image */
+.img-frame{
   position: relative;
-  padding: 22px;
-  border-radius: 26px;
-
+  border-radius: var(--radius);
+  padding: 16px;
   background:
-    linear-gradient(var(--cream), var(--cream)) padding-box,
-    linear-gradient(135deg,
-      var(--honey),
-      var(--honey-dark),
-      var(--honey)
-    ) border-box;
-
-  border: 3px solid transparent;
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.70));
+  border: 2px solid rgba(152,120,38,.22);
   box-shadow:
-    0 0 0 6px rgba(231,200,115,.25),
-    0 12px 30px rgba(0,0,0,.08);
+    0 8px 22px rgba(0,0,0,.10),
+    inset 0 0 0 6px rgba(255,255,255,.55),
+    inset 0 0 0 9px rgba(152,120,38,.10);
+  overflow: hidden; /* anchors corner ornaments so they never drift */
 }
 
-/* CORNER FILIGREE — LOCKED TO FRAME */
-.imgframe::before{
+/* Inner “icon” image styling */
+.img-frame img{
+  width: 100%;
+  aspect-ratio: 1 / 1; /* consistent “app icon” vibe */
+  object-fit: cover;
+  display:block;
+  border-radius: var(--radiusInner);
+  background: #fff;
+  border: 2px solid rgba(152,120,38,.18);
+  box-shadow: 0 10px 20px rgba(0,0,0,.10);
+}
+
+/* Corner ornaments: using the seal as a gentle filigree cue.
+   This makes it feel like a real frame, not a floating overlay. */
+.img-frame::before,
+.img-frame::after{
   content:"";
   position:absolute;
-  inset: 6px;
+  width: 60px;
+  height: 60px;
+  background-image: url("./seal-honey-on-the-hill.PNG");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: .18;
+  filter: saturate(1.05);
   pointer-events:none;
-
-  background:
-    url("seal-honey-on-the-hill.PNG") no-repeat top left / 46px,
-    url("seal-honey-on-the-hill.PNG") no-repeat top right / 46px,
-    url("seal-honey-on-the-hill.PNG") no-repeat bottom left / 46px,
-    url("seal-honey-on-the-hill.PNG") no-repeat bottom right / 46px;
-
-  opacity: .28;
 }
 
-/* PRODUCT IMAGE */
-.imgframe img{
-  width:100%;
-  display:block;
-  border-radius: 18px;
-  background: white;
+.img-frame::before{
+  top: 10px;
+  left: 10px;
+}
+.img-frame::after{
+  top: 10px;
+  right: 10px;
+  transform: scaleX(-1);
 }
 
-/* =========================
-   PRODUCT NAME
-   ========================= */
-
-.product-name{
-  margin-top: 1rem;
-  font-size: 1.15rem;
+/* Optional: bottom corners too, but subtler */
+.img-frame .corner{
+  position:absolute;
+  width: 54px;
+  height: 54px;
+  background-image: url("./seal-honey-on-the-hill.PNG");
+  background-size: contain;
+  background-repeat:no-repeat;
+  opacity: .10;
+  pointer-events:none;
 }
 
-/* =========================
-   FOOTER SPACING
-   ========================= */
+.img-frame .corner.bl{ bottom: 10px; left: 10px; transform: rotate(180deg); }
+.img-frame .corner.br{ bottom: 10px; right: 10px; transform: rotate(180deg) scaleX(-1); }
 
-footer{
-  margin-top: 4rem;
-  font-size: .85rem;
+/* Product title */
+.card h3{
+  margin: 14px 8px 0;
+  text-align:center;
+  font-size: 26px;
+  font-weight: 650;
+  letter-spacing: .2px;
+}
+
+/* Small helper text */
+.card .meta{
+  margin: 8px 8px 0;
+  text-align:center;
   color: var(--muted);
+  font-size: 15px;
 }
+
+/* Buttons (if you have any) */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(152,120,38,.24);
+  background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.64));
+  color: rgba(42,36,26,.88);
+  text-decoration:none;
+  box-shadow: 0 10px 18px rgba(0,0,0,.10);
+}
+
+/* Links */
+a{ color: inherit; }
+a:hover{ text-decoration: underline; }
+
+/* Utility */
+.center{ text-align:center; }
+.spacer{ height: 18px; }
