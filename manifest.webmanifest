@@ -1,0 +1,21 @@
+{
+  "name": "Honey On The Hill",
+  "short_name": "Honey On The Hill",
+  "description": "Small-batch honey and confections from Helen, Georgia.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fbf3e6",
+  "theme_color": "#e6c76b",
+  "icons": [
+    {
+      "src": "hoth-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "hoth-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
