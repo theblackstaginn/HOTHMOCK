@@ -1,3 +1,4 @@
+<!-- ✅ index.html (UPDATED: data-sku added + script tag) -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,7 +6,6 @@
   <title>Honey On The Hill</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Honey On The Hill — All Natural Products from Helen, Georgia." />
-
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -40,37 +40,37 @@
   <!-- Products -->
   <section class="products">
 
-    <article class="product">
+    <article class="product-card" data-sku="energybee">
       <div class="imgframe">
-        <img src="product-energybee.jpg" alt="EnergyBee Honey">
+        <img src="product-energybee.jpg" alt="EnergyBee Honey" />
       </div>
       <h3>EnergyBee</h3>
     </article>
 
-    <article class="product">
+    <article class="product-card" data-sku="honeycomb-candy">
       <div class="imgframe">
-        <img src="product-honeycomb-candy.jpg" alt="Honeycomb Candy">
+        <img src="product-honeycomb-candy.jpg" alt="Honeycomb Candy" />
       </div>
       <h3>Honeycomb Candy</h3>
     </article>
 
-    <article class="product">
+    <article class="product-card" data-sku="honeypops">
       <div class="imgframe">
-        <img src="product-honeypops.jpg" alt="Honey Pops">
+        <img src="product-honeypops.jpg" alt="Honey Pops" />
       </div>
       <h3>Honey Pops</h3>
     </article>
 
-    <article class="product">
+    <article class="product-card" data-sku="saw-honey">
       <div class="imgframe">
-        <img src="saw-honey.jpg" alt="Saw Palmetto Honey">
+        <img src="saw-honey.jpg" alt="Saw Palmetto Honey" />
       </div>
       <h3>Saw Palmetto Honey</h3>
     </article>
 
-    <article class="product">
+    <article class="product-card" data-sku="bee-plush">
       <div class="imgframe">
-        <img src="bee-plush.jpg" alt="Bee Plush">
+        <img src="bee-plush.jpg" alt="Bee Plush" />
       </div>
       <h3>Bee Plush</h3>
     </article>
@@ -82,5 +82,7 @@
     <p>© Honey On The Hill · Helen, Georgia</p>
   </footer>
 
+  <!-- ✅ JS -->
+  <script src="app.js"></script>
 </body>
 </html>
