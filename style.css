@@ -1,91 +1,120 @@
-:root {
-  --bg: #fbf6e9;
-  --ink: #2a2418;
-  --accent: #d4b256;
+:root{
+  --bg:#fbf6e9;
+  --ink:#2a2418;
+  --accent:#d4b256;
 
+  /* Must match your repo EXACTLY (case sensitive) */
   --texture: url("hcomb-bg.PNG");
 }
 
-* {
-  box-sizing: border-box;
-}
+*{ box-sizing:border-box; }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--ink);
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--ink);
   font-family: Georgia, "Times New Roman", serif;
 }
 
-/* Header */
-.site-header {
-  padding: 2.5rem 1rem 1.5rem;
-  text-align: center;
+/* =========================
+   HEADER
+   ========================= */
+.site-header{
+  padding: 1.75rem 1rem 1rem;
+  text-align:center;
 }
 
-.site-seal {
-  width: 140px;
-  height: auto;
+/* Keep seal present but not overpowering */
+.site-seal{
+  width:96px;
+  max-width:30vw;
+  height:auto;
 }
 
-/* Hero */
-.hero {
+/* =========================
+   HERO
+   ========================= */
+.hero{
+  position:relative;
+
+  /* Honeycomb warmth behind hero */
   background:
-    linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+    linear-gradient(rgba(255,255,255,.86), rgba(255,255,255,.86)),
     var(--texture);
-  padding: 1.5rem 0;
+
+  padding: 1.25rem 0;
 }
 
-.hero-image {
-  display: block;
-  width: 100%;
-  max-height: 420px;
+/* Subtle grounding rule under hero */
+.hero::after{
+  content:"";
+  display:block;
+  width:min(820px, 92vw);
+  height:1px;
+  margin: 1.25rem auto 0;
+  background: rgba(42,36,24,.18);
+}
+
+.hero-image{
+  display:block;
+  width:100%;
+
+  /* Makes it actually feel like a hero banner */
+  height: clamp(260px, 45vw, 420px);
   object-fit: cover;
 }
 
-/* Intro */
-.intro {
+/* =========================
+   INTRO
+   ========================= */
+.intro{
+  position:relative;
   max-width: 720px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
-  text-align: center;
+  padding: 2rem 1.5rem 3rem;
+  text-align:center;
 }
 
-.intro p {
-  font-size: 1.05rem;
-  line-height: 1.65;
+.intro p{
+  margin:0;
+  font-size:1.05rem;
+  line-height:1.65;
 }
 
-/* Products */
-.products {
-  display: grid;
+/* =========================
+   PRODUCTS
+   ========================= */
+.products{
+  display:grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2.5rem;
+  gap: 2.25rem;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
+  padding: 0 1.5rem 3rem;
 }
 
-.product-card {
-  text-align: center;
+.product-card{
+  text-align:center;
 }
 
-.product-card img {
-  width: 100%;
+.product-card img{
+  width:100%;
   max-width: 260px;
-  height: auto;
+  height:auto;
 }
 
-.product-card h3 {
-  margin-top: 0.75rem;
+.product-card h3{
+  margin: .75rem 0 0;
   font-weight: normal;
 }
 
-/* Footer */
-.site-footer {
-  text-align: center;
+/* =========================
+   FOOTER
+   ========================= */
+.site-footer{
+  text-align:center;
   padding: 2.5rem 1rem;
-  font-size: 0.9rem;
-  opacity: 0.75;
+  font-size:.9rem;
+  opacity:.75;
 }
