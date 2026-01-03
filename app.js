@@ -1,14 +1,6 @@
+/* ✅ app.js (UPDATED: selector binds to ANY [data-sku] + click works) */
 (() => {
   "use strict";
-
-  /* ===========================
-     HOTH — MOCK CART (NO PRICING)
-     - Click product -> modal
-     - Qty selector + Add to Cart
-     - Cart button shows count
-     - Cart modal shows items + qty +/- + remove
-     - Persists via localStorage
-     =========================== */
 
   const CATALOG = {
     "energybee": {
@@ -55,16 +47,13 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
   };
 
   const CART_KEY = "hoth_mock_cart_v1";
-  const cart = loadCart(); // { sku: qty }
+  const cart = loadCart();
 
-  // ---------- Boot ----------
   initUI();
   wireProducts();
   renderCartBadge();
 
-  // ---------- UI ----------
   function initUI() {
-    // Floating cart button
     const fab = document.createElement("button");
     fab.className = "cart-fab";
     fab.type = "button";
@@ -76,7 +65,6 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
     fab.addEventListener("click", openCartModal);
     document.body.appendChild(fab);
 
-    // Backdrop + modal container (reused for product + cart)
     const backdrop = document.createElement("div");
     backdrop.className = "modal-backdrop";
     backdrop.id = "modalBackdrop";
@@ -93,10 +81,8 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
         <div class="modal-body" id="modalBody"></div>
       </div>
     `;
-
     document.body.appendChild(backdrop);
 
-    // Close btn + Esc
     backdrop.querySelector("#modalClose").addEventListener("click", closeModal);
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModal();
@@ -104,7 +90,8 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
   }
 
   function wireProducts() {
-    const nodes = document.querySelectorAll(".product-card[data-sku]");
+    /* ✅ binds even if you rename classes — as long as data-sku exists */
+    const nodes = document.querySelectorAll("[data-sku]");
     nodes.forEach((card) => {
       card.style.cursor = "pointer";
       card.addEventListener("click", () => {
@@ -112,10 +99,11 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
         openProductModal(sku);
       });
 
-      // A11y: allow Enter/Space to open
       card.tabIndex = 0;
       card.setAttribute("role", "button");
-      card.setAttribute("aria-label", `View ${card.querySelector("h3")?.textContent || "product"}`);
+      const label = card.querySelector("h3")?.textContent || "product";
+      card.setAttribute("aria-label", `View ${label}`);
+
       card.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -126,7 +114,6 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
     });
   }
 
-  // ---------- Product Modal ----------
   function openProductModal(sku) {
     const p = CATALOG[sku];
     if (!p) return;
@@ -159,7 +146,6 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
       </div>
     `;
 
-    // Wire qty
     const qtyInput = body.querySelector("input[type='number']");
     const minus = body.querySelector("[data-qty-minus]");
     const plus = body.querySelector("[data-qty-plus]");
@@ -176,12 +162,11 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
       qtyInput.value = String(v);
     });
 
-    // Add to cart
     body.querySelector("[data-add]").addEventListener("click", () => {
       const qty = clamp(toInt(qtyInput.value) || 1, 1, 99);
       cart[sku] = clamp((cart[sku] || 0) + qty, 1, 999);
       saveCart();
-      // Tiny feedback: change button text briefly
+
       const btn = body.querySelector("[data-add]");
       const old = btn.textContent;
       btn.textContent = "Added ✓";
@@ -193,7 +178,6 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
     openModal();
   }
 
-  // ---------- Cart Modal ----------
   function openCartModal() {
     setModalTitle("Cart");
 
@@ -235,7 +219,6 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
       </div>
     `;
 
-    // Wire row controls
     body.querySelectorAll("[data-sku]").forEach((row) => {
       const sku = row.getAttribute("data-sku");
       const minus = row.querySelector("[data-minus]");
@@ -260,7 +243,7 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
       remove.addEventListener("click", () => {
         delete cart[sku];
         saveCart();
-        openCartModal(); // rerender
+        openCartModal();
       });
     });
 
@@ -292,31 +275,25 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
     `;
   }
 
-  // ---------- Modal helpers ----------
   function openModal() {
-    const b = document.getElementById("modalBackdrop");
-    b.classList.add("open");
+    document.getElementById("modalBackdrop").classList.add("open");
   }
 
   function closeModal() {
-    const b = document.getElementById("modalBackdrop");
-    b.classList.remove("open");
+    document.getElementById("modalBackdrop").classList.remove("open");
   }
 
   function setModalTitle(title) {
-    const t = document.getElementById("modalTitle");
-    t.textContent = title;
+    document.getElementById("modalTitle").textContent = title;
   }
 
-  // ---------- Cart helpers ----------
   function cartCount() {
     return Object.values(cart).reduce((sum, n) => sum + (toInt(n) || 0), 0);
   }
 
   function renderCartBadge() {
     const badge = document.getElementById("cartBadge");
-    if (!badge) return;
-    badge.textContent = String(cartCount());
+    if (badge) badge.textContent = String(cartCount());
   }
 
   function loadCart() {
@@ -335,7 +312,6 @@ A cheerful reminder of the hardworking pollinators that make all of this possibl
     renderCartBadge();
   }
 
-  // ---------- Utility ----------
   function toInt(x) {
     const n = parseInt(String(x), 10);
     return Number.isFinite(n) ? n : 0;
