@@ -1,219 +1,145 @@
 /* ===========================
-   HOTH MOCK — style.css (FIXED)
-   - Scrollable page
-   - Fixed honeycomb background (iOS-safe)
-   - Seal + hero do NOT overlap
-   - Product images normalized + framed (item-frame.PNG)
-   - Removes “whacky sizing” + ensures frame shows
+   HOTH MOCK — FINAL
    =========================== */
 
 :root{
-  --bg: #fbf3e6;         /* warm paper */
-  --ink: #2a241c;        /* soft dark */
-  --muted: rgba(42,36,28,.72);
+  --bg:#fbf3e6;
+  --ink:#2a241c;
+  --muted:rgba(42,36,28,.7);
 
-  --card: rgba(255,255,255,.78);
-  --cardEdge: rgba(168,140,78,.35);
+  --shadow:0 12px 28px rgba(0,0,0,.12);
 
-  --shadow: 0 14px 30px rgba(0,0,0,.12);
-  --radius: 22px;
-
-  /* honeycomb texture control */
-  --hcombOpacity: .26;   /* slightly more prominent */
-  --hcombSaturate: 1.18; /* a touch more saturation */
-  --hcombContrast: 1.06;
-  --hcombBlur: 0px;      /* keep crisp */
+  --frameInset:14%; /* single tuning knob */
 }
 
-/* Basic reset */
-*{ box-sizing: border-box; }
-html, body{ height: 100%; }
-img{ max-width: 100%; height: auto; display:block; }
+/* Reset */
+*{ box-sizing:border-box }
+html,body{ margin:0 }
+img{ display:block; max-width:100% }
 
 body{
-  margin: 0;
-  color: var(--ink);
-  background: var(--bg);
-  font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
-  line-height: 1.35;
-  overflow-x: hidden;
-  -webkit-text-size-adjust: 100%;
+  font-family: ui-serif, Georgia, serif;
+  color:var(--ink);
+  background:var(--bg);
+  overflow-x:hidden;
 }
 
-/* Fixed background layer (does NOT scroll) */
+/* Fixed honeycomb background */
 body::before{
   content:"";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background-image: url("hcomb-bg.PNG");
-  background-repeat: repeat;
-  background-size: 520px auto; /* adjust for scale */
-  opacity: var(--hcombOpacity);
-  filter: saturate(var(--hcombSaturate)) contrast(var(--hcombContrast)) blur(var(--hcombBlur));
-  pointer-events: none;
-  transform: translateZ(0); /* iOS paint stability */
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:url("hcomb-bg.PNG") repeat;
+  background-size:520px auto;
+  opacity:.25;
+  filter:saturate(1.15);
+  pointer-events:none;
 }
 
-/* Optional soft vignette / warmth */
-body::after{
-  content:"";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(1200px 700px at 50% 10%, rgba(255,220,140,.22), transparent 60%),
-    radial-gradient(900px 700px at 50% 90%, rgba(120,90,30,.08), transparent 60%);
-}
-
-/* Page width control */
+/* Page width */
 .site-header,
 .hero,
 .intro,
 .products,
 .site-footer{
-  width: min(980px, calc(100% - 36px));
-  margin-left: auto;
-  margin-right: auto;
+  width:min(980px, calc(100% - 36px));
+  margin-inline:auto;
 }
 
-/* Header seal (no overlap) */
+/* Header */
 .site-header{
-  padding: 24px 0 10px;
-  text-align: center;
+  padding:24px 0 10px;
+  text-align:center;
 }
 
 .site-seal{
-  display: inline-block;
-  width: clamp(170px, 38vw, 280px);
-  height: auto;
+  width:clamp(170px, 38vw, 280px);
 }
 
-/* Hero banner */
-.hero{
-  padding: 10px 0 0;
-}
+/* Hero */
+.hero{ padding-top:10px }
 
 .hero-image{
-  width: 100%;
-  height: clamp(170px, 32vw, 300px);
-  object-fit: cover;
-  border-radius: 26px;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(0,0,0,.06);
+  width:100%;
+  height:clamp(180px, 32vw, 300px);
+  object-fit:cover;
+  border-radius:26px;
+  box-shadow:var(--shadow);
 }
 
-/* Intro text */
+/* Intro */
 .intro{
-  padding: 18px 8px 6px;
-  text-align: center;
-  font-size: clamp(18px, 3.8vw, 26px);
-  color: var(--ink);
+  text-align:center;
+  padding:18px 8px;
+  font-size:clamp(18px, 4vw, 26px);
 }
 
 .intro p{
-  margin: 0 auto;
-  max-width: 34ch;
-  padding: 14px 16px;
-  background: rgba(255,255,255,.55);
-  border: 1px solid rgba(168,140,78,.22);
-  border-radius: 18px;
-  box-shadow: 0 10px 20px rgba(0,0,0,.07);
-  backdrop-filter: blur(6px);
+  margin:0 auto;
+  max-width:34ch;
+  padding:14px 16px;
+  background:rgba(255,255,255,.55);
+  border-radius:18px;
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
 }
 
-/* Products grid */
+/* Products */
 .products{
-  padding: 18px 0 34px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:22px;
+  padding:26px 0 40px;
 }
 
-@media (min-width: 820px){
-  .products{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (min-width:820px){
+  .products{
+    grid-template-columns:repeat(3,1fr);
+  }
 }
 
-.product-card{
-  background: var(--card);
-  border: 1px solid var(--cardEdge);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 14px 14px 16px;
-  text-align: center;
-  backdrop-filter: blur(7px);
+/* Product unit */
+.product{
+  text-align:center;
 }
 
-/* =========================================================
-   FIX: predictable image sizing + frame overlay always visible
-   - Make the frame area a square using aspect-ratio
-   - Crop/contain inside that square
-   - Draw item-frame.PNG on top (z-index)
-   ========================================================= */
-
-/* =========================================================
-   IMAGE FRAME (item-frame.PNG) — reliable overlay method
-   - Frame sits on TOP, never crops
-   - Image sits underneath, positioned by one inset variable
-   ========================================================= */
-
-:root{
-  /* TUNE THIS ONE VALUE until the photo sits perfectly in the frame window */
-  --windowInset: 18%; /* try 16%–24% */
-}
-
+/* Frame */
 .imgframe{
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 18px;
-  overflow: hidden;
-  background: rgba(255,255,255,.55);
+  position:relative;
+  width:100%;
+  aspect-ratio:1/1;
 }
 
-/* Product image is placed inside the frame window via inset */
+/* Image fits frame window */
 .imgframe img{
-  position: absolute;
-  inset: var(--windowInset);
-  width: auto;
-  height: auto;
-  max-width: calc(100% - (2 * var(--windowInset)));
-  max-height: calc(100% - (2 * var(--windowInset)));
-
-  /* Choose ONE:
-     - contain = shows whole product (best for jars/bottles)
-     - cover   = icon crop (best for busy candy mixes) */
-  object-fit: contain;
-
-  border-radius: 14px;
-  background: rgba(255,255,255,.96);
-  z-index: 1;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:var(--frameInset);
+  background:#fff;
+  border-radius:18px;
 }
 
-/* Frame overlay on top, perfectly scaled */
+/* Frame art */
 .imgframe::after{
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("item-frame.PNG") center / contain no-repeat;
-  opacity: 1;
-  pointer-events: none;
-  z-index: 2;
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("item-frame.PNG") center / contain no-repeat;
+  pointer-events:none;
+  z-index:2;
 }
 
-/* Product titles */
-.product-card h3{
-  margin: 12px 0 0;
-  font-size: 20px;
-  letter-spacing: .3px;
-  color: var(--ink);
+/* Titles */
+.product h3{
+  margin:10px 0 0;
+  font-size:20px;
 }
 
 /* Footer */
 .site-footer{
-  padding: 18px 0 30px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 14px;
+  text-align:center;
+  padding:18px 0 30px;
+  font-size:14px;
+  color:var(--muted);
 }
