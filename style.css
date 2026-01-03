@@ -29,7 +29,7 @@ body{
   /* FULL PAGE TEXTURE + a little more presence */
   background:
     /* warm wash (slightly lighter so text stays readable) */
-    linear-gradient(rgba(251,246,233,.88), rgba(251,246,233,.88)),
+    linear-gradient(rgba(251,246,233,.84), rgba(251,246,233,.84)),
     /* gentle honey tint layer to boost saturation */
     radial-gradient(circle at 30% 20%, rgba(212,178,86,.16), transparent 55%),
     var(--texture);
