@@ -1,179 +1,169 @@
+/* =========================
+   ROOT VARIABLES
+   ========================= */
+
 :root{
-  --bg:#fbf6e9;
-  --ink:#2a2418;
+  --cream: #fbf6ea;
+  --honey: #e7c873;
+  --honey-dark: #c9a64d;
+  --ink: #2f2a24;
+  --muted: rgba(47,42,36,.7);
 
-  --honey:#d4b256;
-  --cream:#fff7e6;
-
-  /* must match repo exactly (case-sensitive) */
-  --texture: url("hcomb-bg.PNG");
+  --bg-texture: url("hcomb-bg.PNG");
 }
 
-*{ box-sizing:border-box; }
+/* =========================
+   GLOBAL RESET
+   ========================= */
+
+*{
+  box-sizing: border-box;
+}
 
 html, body{
   margin:0;
   padding:0;
   height:100%;
-  color:var(--ink);
-  font-family: Georgia, "Times New Roman", serif;
 }
 
-/* =========================
-   PAGE + FIXED BACKGROUND
-   ========================= */
 body{
-  min-height:100vh;
-  overflow-y:auto;
-  position:relative;
-  background: var(--bg);
-}
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--ink);
 
-/* true fixed background (iOS-safe) */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  pointer-events:none;
-
+  /* FIXED HONEYCOMB BACKGROUND */
   background:
-    /* warm wash for readability */
-    linear-gradient(rgba(251,246,233,.84), rgba(251,246,233,.84)),
-    /* gentle honey saturation */
-    radial-gradient(circle at 30% 20%, rgba(212,178,86,.22), transparent 55%),
-    var(--texture);
+    linear-gradient(
+      rgba(251,246,234,.92),
+      rgba(251,246,234,.92)
+    ),
+    var(--bg-texture);
 
-  background-repeat: repeat;
-  background-size: 320px 320px, 900px 900px, 320px 320px;
+  background-size: 320px 280px;
+  background-attachment: fixed;
+  background-position: center;
+
+  overflow-y: auto;
 }
 
 /* =========================
-   HEADER
+   LAYOUT
    ========================= */
-.site-header{
-  padding: 1.6rem 1rem 1rem;
-  text-align:center;
+
+main{
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
 }
 
-.site-seal{
-  width:96px;
-  max-width:30vw;
-  height:auto;
+section{
+  margin-bottom: 3rem;
+  text-align: center;
 }
 
 /* =========================
    HERO
    ========================= */
+
 .hero{
-  padding: 1.15rem 0 0;
+  margin-bottom: 2.5rem;
 }
 
-.hero::after{
-  content:"";
-  display:block;
-  width:min(820px, 92vw);
-  height:1px;
-  margin: 1.15rem auto 0;
-  background: rgba(42,36,24,.22);
-}
-
-.hero-image{
-  display:block;
+.hero img{
   width:100%;
-  height: clamp(260px, 45vw, 420px);
-  object-fit: cover;
+  height:auto;
+  border-radius: 18px;
+  display:block;
 }
 
 /* =========================
-   INTRO
+   TEXT
    ========================= */
-.intro{
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 2.75rem;
-  text-align:center;
+
+p{
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 36ch;
+  margin: 1.25rem auto;
 }
 
-.intro p{
-  margin:0;
-  font-size:1.05rem;
-  line-height:1.65;
-}
-
-/* =========================
-   PRODUCTS
-   ========================= */
-.products{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2.25rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1.5rem 3rem;
-}
-
-.product-card{
-  text-align:center;
-}
-
-.product-card h3{
-  margin: .8rem 0 0;
+h2{
   font-weight: normal;
-}
-/* =========================
-   WILDFLOWER FILIGREE FRAME
-   ========================= */
-.imgframe{
-  display:inline-block;
-  position:relative;
-  margin:0 auto;
-  border-radius:20px;
-  padding:10px;
-  background: var(--cream);
-  box-shadow: 0 10px 22px rgba(0,0,0,.10);
+  margin-top: .75rem;
 }
 
-/* honey rim + ink edge */
+/* =========================
+   PRODUCT GRID
+   ========================= */
+
+.products{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+/* =========================
+   TRUE FILIGREE FRAME
+   ========================= */
+
+.imgframe{
+  position: relative;
+  padding: 22px;
+  border-radius: 26px;
+
+  background:
+    linear-gradient(var(--cream), var(--cream)) padding-box,
+    linear-gradient(135deg,
+      var(--honey),
+      var(--honey-dark),
+      var(--honey)
+    ) border-box;
+
+  border: 3px solid transparent;
+  box-shadow:
+    0 0 0 6px rgba(231,200,115,.25),
+    0 12px 30px rgba(0,0,0,.08);
+}
+
+/* CORNER FILIGREE — LOCKED TO FRAME */
 .imgframe::before{
   content:"";
   position:absolute;
-  inset:-2px;
-  border-radius:22px;
+  inset: 6px;
   pointer-events:none;
-  box-shadow:
-    0 0 0 3px rgba(212,178,86,.30),
-    0 0 0 1px rgba(42,36,24,.14);
+
+  background:
+    url("seal-honey-on-the-hill.PNG") no-repeat top left / 46px,
+    url("seal-honey-on-the-hill.PNG") no-repeat top right / 46px,
+    url("seal-honey-on-the-hill.PNG") no-repeat bottom left / 46px,
+    url("seal-honey-on-the-hill.PNG") no-repeat bottom right / 46px;
+
+  opacity: .28;
 }
 
-/* wildflower filigree overlay */
-.imgframe::after{
-  content:"";
-  position:absolute;
-  inset:4px;
-  border-radius:18px;
-  pointer-events:none;
-  opacity:.88;
-
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Cdefs%3E%3Cstyle%3E.s%7Bfill:none;stroke:%232a2418;stroke-opacity:.22;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round%7D.f%7Bfill:none;stroke:%23d4b256;stroke-opacity:.48;stroke-width:1;stroke-linecap:round;stroke-linejoin:round%7D%3C/style%3E%3C/defs%3E%3Crect%20x='6'%20y='6'%20width='88'%20height='88'%20rx='10'%20class='s'/%3E%3Cpath%20class='f'%20d='M14%2020c4-6%208-6%2012%200M14%2024c5-4%209-4%2014%200M20%2014c0%205-2%208-6%2010M24%2014c0%205%202%208%206%2010'/%3E%3Cpath%20class='f'%20d='M86%2020c-4-6-8-6-12%200M86%2024c-5-4-9-4-14%200M80%2014c0%205%202%208%206%2010M76%2014c0%205-2%208-6%2010'/%3E%3Cpath%20class='f'%20d='M14%2080c4%206%208%206%2012%200M14%2076c5%204%209%204%2014%200M20%2086c0-5-2-8-6-10M24%2086c0-5%202-8%206-10'/%3E%3Cpath%20class='f'%20d='M86%2080c-4%206-8%206-12%200M86%2076c-5%204-9%204-14%200M80%2086c0-5%202-8%206-10M76%2086c0-5-2%208-6%2010'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-size:100% 100%;
-}
-
+/* PRODUCT IMAGE */
 .imgframe img{
-  display:block;
   width:100%;
-  max-width:260px;
-  height:auto;
-  border-radius:14px;
+  display:block;
+  border-radius: 18px;
+  background: white;
 }
 
 /* =========================
-   FOOTER
+   PRODUCT NAME
    ========================= */
-.site-footer{
-  text-align:center;
-  padding: 2.5rem 1rem;
-  font-size:.9rem;
-  opacity:.78;
+
+.product-name{
+  margin-top: 1rem;
+  font-size: 1.15rem;
+}
+
+/* =========================
+   FOOTER SPACING
+   ========================= */
+
+footer{
+  margin-top: 4rem;
+  font-size: .85rem;
+  color: var(--muted);
 }
