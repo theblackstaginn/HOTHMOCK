@@ -1,14 +1,11 @@
-
 :root{
   --bg:#fbf6e9;
   --ink:#2a2418;
 
-  /* Honey accent family */
   --honey:#d4b256;
-  --honeyDeep:#b88f2e;
   --cream:#fff7e6;
 
-  /* Honeycomb texture (case-sensitive) */
+  /* case-sensitive */
   --texture: url("hcomb-bg.PNG");
 }
 
@@ -17,36 +14,36 @@
 html, body{
   margin:0;
   padding:0;
+  height:100%;
   color:var(--ink);
   font-family: Georgia, "Times New Roman", serif;
 }
 
-/* ✅ Scrollable site (default) + ✅ fixed background */
+/* ✅ Normal scrolling */
 body{
   min-height:100vh;
   overflow-y:auto;
+  background: var(--bg);
+  position: relative;
+}
 
-  /* FULL PAGE TEXTURE + a little more presence */
+/* ✅ TRUE fixed background (works on iOS) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
   background:
-    /* warm wash (slightly lighter so text stays readable) */
-    linear-gradient(rgba(251,246,233,.84), rgba(251,246,233,.84)),
-    /* gentle honey tint layer to boost saturation */
-    radial-gradient(circle at 30% 20%, rgba(212,178,86,.16), transparent 55%),
+    /* readability wash (slightly lighter so text stays readable) */
+    linear-gradient(rgba(251,246,233,.86), rgba(251,246,233,.86)),
+    /* honey tint boost for saturation */
+    radial-gradient(circle at 30% 20%, rgba(212,178,86,.20), transparent 55%),
     var(--texture);
 
   background-repeat: repeat;
   background-size: 320px 320px, 900px 900px, 320px 320px;
-
-  /* ✅ fixed background */
-  background-attachment: fixed, fixed, fixed;
-}
-
-/* iOS Safari can be weird with fixed backgrounds.
-   This soft-fallback keeps it stable if needed. */
-@supports (-webkit-touch-callout: none){
-  body{
-    background-attachment: scroll, scroll, scroll;
-  }
 }
 
 /* =========================
@@ -118,7 +115,7 @@ body{
   text-align:center;
 }
 
-/* ✅ Rounded icon feel + cottagecore border */
+/* Rounded icon feel + cottagecore frame */
 .product-card img{
   width:100%;
   max-width: 260px;
@@ -126,18 +123,15 @@ body{
 
   border-radius: 18px;
 
-  /* cottagecore “frame”: soft cream + honey edge + subtle ink line */
   border: 10px solid var(--cream);
   outline: 1px solid rgba(42,36,24,.20);
 
-  /* warm honey rim glow (very restrained) */
   box-shadow:
     0 10px 22px rgba(0,0,0,.10),
     0 0 0 3px rgba(212,178,86,.35);
 
   background: var(--cream);
 
-  /* keeps border looking clean even on transparent-ish images */
   display:block;
   margin: 0 auto;
 }
