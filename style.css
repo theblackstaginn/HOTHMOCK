@@ -339,3 +339,24 @@ body::before{
   border-top: 1px solid rgba(168,140,78,.18);
   font-weight: 700;
 }
+/* ===========================
+   SCROLLABLE PRODUCT DESCRIPTION
+   =========================== */
+
+.modal-desc{
+  max-height: 160px;          /* adjust 140–200px to taste */
+  overflow-y: auto;
+  padding-right: 6px;         /* space for scrollbar */
+}
+
+/* soften scrollbar (WebKit) */
+.modal-desc::-webkit-scrollbar{
+  width: 6px;
+}
+.modal-desc::-webkit-scrollbar-thumb{
+  background: rgba(168,140,78,.35);
+  border-radius: 6px;
+}
+.modal-desc::-webkit-scrollbar-track{
+  background: transparent;
+}
