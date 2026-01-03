@@ -1,45 +1,19 @@
-/* =========================
-   Honey On The Hill — Mockup
-   Files in repo root (case-sensitive):
-   - hcomb-bg.PNG
-   - hero-honey-spread.PNG
-   - seal-honey-on-the-hill.PNG
-   - product-energybee.jpg
-   - product-honeycomb-candy.jpg
-   - product-honeypops.jpg
-   - saw-honey.jpg
-   - bee-plush.jpg
-   ========================= */
-
 :root{
   --bg: #fbf4e6;
   --ink: #2a241a;
-  --muted: rgba(42,36,26,.70);
-
-  --honey: #caa12d;
-  --honey2: #e0c45a;
-
-  --card: rgba(255,255,255,.78);
-  --card2: rgba(255,255,255,.92);
-
-  --ring: rgba(152,120,38,.35);
-  --ring2: rgba(152,120,38,.18);
-
-  --shadow: 0 16px 40px rgba(0,0,0,.14);
-  --shadow2: 0 10px 22px rgba(0,0,0,.12);
-
-  --radius: 26px;
-  --radiusInner: 22px;
 
   --max: 980px;
+  --radius: 22px;
 
-  /* Background prominence controls */
-  --combOpacity: .38;     /* raise a bit if you want it louder */
-  --combSaturate: 1.18;   /* “more saturation” */
-  --combContrast: 1.05;
+  /* background prominence */
+  --combOpacity: .34;
+  --combSaturate: 1.16;
+  --combContrast: 1.04;
+
+  --shadow: 0 14px 34px rgba(0,0,0,.14);
+  --shadow2: 0 10px 22px rgba(0,0,0,.12);
 }
 
-/* Reset / base */
 *{ box-sizing:border-box; }
 html, body{ height:100%; }
 body{
@@ -50,14 +24,14 @@ body{
   overflow-x:hidden;
 }
 
-/* Fixed honeycomb background (does NOT scroll) */
+/* FIXED honeycomb background */
 body::before{
   content:"";
   position: fixed;
   inset: 0;
   background-image: url("./hcomb-bg.PNG");
   background-repeat: repeat;
-  background-size: 520px;          /* tweak if you want tighter/larger cells */
+  background-size: 520px;
   background-position: center;
   opacity: var(--combOpacity);
   filter: saturate(var(--combSaturate)) contrast(var(--combContrast));
@@ -65,7 +39,7 @@ body::before{
   z-index:-2;
 }
 
-/* Soft vignette over the honeycomb so text stays readable */
+/* readability veil */
 body::after{
   content:"";
   position: fixed;
@@ -78,188 +52,118 @@ body::after{
   z-index:-1;
 }
 
-/* Page wrapper */
 .wrap{
   width: min(var(--max), calc(100% - 28px));
   margin: 22px auto 60px;
 }
 
-/* Top “seal” logo area */
+/* top seal */
 .brand{
   display:flex;
   justify-content:center;
   padding: 18px 0 6px;
 }
-
 .brand img{
-  width: min(420px, 82vw);
-  height: auto;
+  width: min(360px, 78vw); /* smaller than before */
+  height:auto;
   display:block;
-  filter: drop-shadow(0 18px 26px rgba(0,0,0,.18));
+  filter: drop-shadow(0 16px 22px rgba(0,0,0,.16));
 }
 
-/* Hero image (no overlap with logo) */
+/* hero */
 .hero{
-  margin: 18px auto 18px;
-  border-radius: 28px;
+  margin: 16px auto 18px;
+  border-radius: 24px;
   overflow:hidden;
   box-shadow: var(--shadow);
-  background: rgba(255,255,255,.35);
 }
-
 .hero img{
-  width: 100%;
-  height: auto;
+  width:100%;
+  height:auto;
   display:block;
 }
 
-/* Intro copy panel */
+/* intro */
 .lead{
   margin: 18px auto 26px;
-  padding: 26px 22px;
-  border-radius: 28px;
-  background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.62));
+  padding: 22px 18px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.72);
   box-shadow: var(--shadow2);
-  border: 1px solid rgba(152,120,38,.16);
+  border: 1px solid rgba(152,120,38,.14);
   text-align:center;
 }
-
 .lead p{
   margin:0;
-  font-size: clamp(18px, 2.2vw, 26px);
+  font-size: clamp(18px, 2.1vw, 24px);
   line-height: 1.55;
   color: rgba(42,36,26,.86);
-  letter-spacing: .2px;
 }
 
-/* Product grid */
+/* grid */
 .grid{
   display:grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-  margin-top: 18px;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 18px;
 }
-
 @media (max-width: 940px){
-  .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
 @media (max-width: 620px){
   .grid{ grid-template-columns: 1fr; }
 }
 
-/* Product card */
+/* card */
 .card{
-  border-radius: 30px;
-  padding: 18px 16px 16px;
-  background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.58));
-  border: 1px solid rgba(152,120,38,.16);
+  padding: 14px;
+  border-radius: 22px;
+  background: rgba(255,255,255,.68);
+  border: 1px solid rgba(152,120,38,.14);
   box-shadow: var(--shadow2);
 }
 
-/* “Cottagecore frame” that is actually attached to the image */
-.img-frame{
+/* ---------- PRODUCT IMAGE (SANE SIZING) ---------- */
+.frame{
   position: relative;
-  border-radius: var(--radius);
-  padding: 16px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.70));
-  border: 2px solid rgba(152,120,38,.22);
-  box-shadow:
-    0 8px 22px rgba(0,0,0,.10),
-    inset 0 0 0 6px rgba(255,255,255,.55),
-    inset 0 0 0 9px rgba(152,120,38,.10);
-  overflow: hidden; /* anchors corner ornaments so they never drift */
-}
-
-/* Inner “icon” image styling */
-.img-frame img{
   width: 100%;
-  aspect-ratio: 1 / 1; /* consistent “app icon” vibe */
-  object-fit: cover;
+  max-width: 330px;          /* keeps images from becoming gigantic */
+  margin: 0 auto;            /* centers in card */
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+/* actual product image */
+.frame img.product{
+  width: 100%;
+  height: auto;
   display:block;
-  border-radius: var(--radiusInner);
-  background: #fff;
-  border: 2px solid rgba(152,120,38,.18);
-  box-shadow: 0 10px 20px rgba(0,0,0,.10);
-}
-
-/* Corner ornaments: using the seal as a gentle filigree cue.
-   This makes it feel like a real frame, not a floating overlay. */
-.img-frame::before,
-.img-frame::after{
-  content:"";
-  position:absolute;
-  width: 60px;
-  height: 60px;
-  background-image: url("./seal-honey-on-the-hill.PNG");
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: .18;
-  filter: saturate(1.05);
-  pointer-events:none;
-}
-
-.img-frame::before{
-  top: 10px;
-  left: 10px;
-}
-.img-frame::after{
-  top: 10px;
-  right: 10px;
-  transform: scaleX(-1);
-}
-
-/* Optional: bottom corners too, but subtler */
-.img-frame .corner{
-  position:absolute;
-  width: 54px;
-  height: 54px;
-  background-image: url("./seal-honey-on-the-hill.PNG");
-  background-size: contain;
-  background-repeat:no-repeat;
-  opacity: .10;
-  pointer-events:none;
-}
-
-.img-frame .corner.bl{ bottom: 10px; left: 10px; transform: rotate(180deg); }
-.img-frame .corner.br{ bottom: 10px; right: 10px; transform: rotate(180deg) scaleX(-1); }
-
-/* Product title */
-.card h3{
-  margin: 14px 8px 0;
-  text-align:center;
-  font-size: 26px;
-  font-weight: 650;
-  letter-spacing: .2px;
-}
-
-/* Small helper text */
-.card .meta{
-  margin: 8px 8px 0;
-  text-align:center;
-  color: var(--muted);
-  font-size: 15px;
-}
-
-/* Buttons (if you have any) */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap: 10px;
-  padding: 12px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(152,120,38,.24);
-  background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.64));
-  color: rgba(42,36,26,.88);
-  text-decoration:none;
+  border-radius: 22px;
+  background:#fff;
   box-shadow: 0 10px 18px rgba(0,0,0,.10);
 }
 
-/* Links */
-a{ color: inherit; }
-a:hover{ text-decoration: underline; }
+/* decorative frame overlay PNG (you’ll add item-frame.PNG) */
+.frame::after{
+  content:"";
+  position:absolute;
+  inset: 0;
+  background-image: url("./item-frame.PNG"); /* add to root */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  pointer-events:none;
+  opacity: .98;
+}
 
-/* Utility */
-.center{ text-align:center; }
-.spacer{ height: 18px; }
+/* title */
+.card h3{
+  margin: 12px 6px 0;
+  text-align:center;
+  font-size: 22px;
+  font-weight: 650;
+}
+.card .meta{
+  margin: 6px 6px 0;
+  text-align:center;
+  color: rgba(42,36,26,.70);
+  font-size: 14px;
+}
