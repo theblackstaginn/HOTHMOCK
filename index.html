@@ -2,162 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <title>Honey On The Hill</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Honey On The Hill — Mockup</title>
-  <meta name="description" content="All-natural honey and confections — crafted in North Georgia." />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <!-- Top bar -->
-  <header class="topbar" role="banner">
-    <button class="iconbtn" id="menuBtn" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
-      <span class="burger" aria-hidden="true"></span>
-    </button>
 
-    <div class="brandmark" aria-label="Honey On The Hill">
-      <img class="brandmark__seal" src="seal-honey-on-the-hill.png" alt="Honey On The Hill seal logo" />
-    </div>
-
-    <a class="iconbtn cartbtn" href="#shop" aria-label="View cart">
-      <span class="cart" aria-hidden="true"></span>
-      <span class="cartcount" id="cartCount" aria-label="Items in cart">1</span>
-    </a>
+  <!-- Header -->
+  <header class="site-header">
+    <img
+      src="logo-honey-on-the-hill.png"
+      alt="Honey On The Hill Logo"
+      class="site-logo"
+    />
   </header>
 
-  <!-- Mobile menu overlay -->
-  <nav class="mobilemenu" id="mobileMenu" aria-label="Site menu" hidden>
-    <button class="mobilemenu__close" id="closeMenuBtn" aria-label="Close menu">×</button>
-    <a href="#home" class="mobilemenu__link">Home</a>
-    <a href="#about" class="mobilemenu__link">About Us</a>
-    <a href="#shop" class="mobilemenu__link">Shop Online</a>
-  </nav>
-
-  <!-- Search -->
-  <section class="searchwrap" aria-label="Search products">
-    <div class="search">
-      <span class="search__icon" aria-hidden="true"></span>
-      <input id="searchInput" class="search__input" type="search" placeholder="Search…" autocomplete="off" />
-    </div>
+  <!-- Hero -->
+  <section class="hero">
+    <img
+      src="hero-honey-spread.png"
+      alt="Honey and honeycomb spread"
+      class="hero-image"
+    />
   </section>
 
-  <main id="home" class="page" role="main">
-    <!-- Hero -->
-    <section class="hero" aria-label="Featured">
-      <img class="hero__img" src="hero-honey-spread.png" alt="Honey and confections hero image" />
-      <div class="hero__caption">
-        <h1 class="hero__title">Honey On The Hill</h1>
-        <p class="hero__sub">All-natural honey & confections with a little mountain warmth.</p>
-      </div>
-    </section>
+  <!-- Intro -->
+  <section class="intro">
+    <img
+      src="seal-honey-on-the-hill.png"
+      alt="Honey On The Hill Seal"
+      class="seal"
+    />
+    <p>
+      Small-batch honey and confections crafted in Helen, Georgia —
+      made with respect for the bees and the land.
+    </p>
+  </section>
 
-    <!-- Quick links (same structure vibe as their site buttons) -->
-    <section class="pilllinks" aria-label="Quick links">
-      <a class="pill" href="#stores">Our Stores</a>
-      <a class="pill" href="#packages">Bees, Nucs, Packages</a>
-    </section>
+  <!-- Products -->
+  <section class="products">
+    <article class="product-card">
+      <img src="product-energybee.png" alt="Energy Bee Honey" />
+      <h3>EnergyBee</h3>
+    </article>
 
-    <!-- Shop -->
-    <section id="shop" class="section">
-      <h2 class="section__title">Shop Online</h2>
+    <article class="product-card">
+      <img src="product-honeycomb-candy.png" alt="Honeycomb Candy" />
+      <h3>Honeycomb Candy</h3>
+    </article>
 
-      <div class="grid" id="productGrid">
-        <!-- Product 1 -->
-        <article class="card" data-name="EnergyBee">
-          <div class="card__imgwrap">
-            <img src="product-energybee.png" alt="EnergyBee" />
-          </div>
-          <div class="card__body">
-            <h3 class="card__name">EnergyBee</h3>
-            <div class="card__price">$20.00</div>
+    <article class="product-card">
+      <img src="product-honeypops.png" alt="Honey Pops" />
+      <h3>Honey Pops</h3>
+    </article>
+  </section>
 
-            <div class="qty">
-              <button class="qty__btn" type="button" aria-label="Decrease quantity">−</button>
-              <input class="qty__val" type="text" value="1" inputmode="numeric" aria-label="Quantity" />
-              <button class="qty__btn" type="button" aria-label="Increase quantity">+</button>
-            </div>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© Honey On The Hill · Helen, Georgia</p>
+  </footer>
 
-            <button class="cta" type="button">Add to Cart</button>
-          </div>
-        </article>
-
-        <!-- Product 2 -->
-        <article class="card" data-name="Honeycomb Candy">
-          <div class="card__imgwrap">
-            <img src="product-honeycomb.png" alt="Honeycomb Candy" />
-          </div>
-          <div class="card__body">
-            <h3 class="card__name">Honeycomb Candy</h3>
-            <div class="card__price">$18.00</div>
-
-            <button class="cta cta--muted" type="button" disabled>Out of Stock</button>
-          </div>
-        </article>
-
-        <!-- Product 3 -->
-        <article class="card" data-name="Honey Pops">
-          <div class="card__imgwrap">
-            <img src="product-honeypops.png" alt="Honey Pops" />
-          </div>
-          <div class="card__body">
-            <h3 class="card__name">Honey Pops</h3>
-            <div class="card__price">$3.50</div>
-
-            <button class="cta cta--muted" type="button" disabled>Out of Stock</button>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="section">
-      <h2 class="section__title">Our Story</h2>
-      <p class="prose">
-        We believe bees are powerful creatures that contribute vastly to the world as we know it. Our goal is to share the many
-        healthful products honeybees create — and the respect they deserve.
-      </p>
-
-      <div class="note">
-        <h3 class="note__title">A Note from Our Founder</h3>
-        <p class="note__text">
-          “Honey On The Hill was built on the belief that honey should be responsibly-sourced in partnership with our bees…”
-        </p>
-      </div>
-    </section>
-
-    <!-- Stores / Packages anchors (structure placeholders) -->
-    <section id="stores" class="section">
-      <h2 class="section__title">Our Stores</h2>
-      <p class="prose">Visit us in Helen, GA — and keep an eye out for seasonal favorites.</p>
-    </section>
-
-    <section id="packages" class="section">
-      <h2 class="section__title">Bees, Nucs, Packages</h2>
-      <p class="prose">Information and availability can live here (simple, clear, no clutter).</p>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer" aria-label="Contact">
-      <h2 class="footer__title">Connect</h2>
-
-      <div class="social">
-        <a class="social__dot" href="#" aria-label="Facebook">f</a>
-        <a class="social__dot" href="#" aria-label="Instagram">⌁</a>
-      </div>
-
-      <div class="footer__meta">
-        <div class="footer__name">HONEY ON THE HILL</div>
-        <a class="footer__link" href="mailto:info@honeyonthehill.com">info@honeyonthehill.com</a>
-        <div class="footer__line">706-878-9982</div>
-        <div class="footer__line">8600 N Main St</div>
-        <div class="footer__line">Helen, GA 30601</div>
-      </div>
-    </footer>
-
-    <button class="toTop" id="toTop" aria-label="Scroll to top">↑</button>
-  </main>
-
-  <script src="app.js"></script>
 </body>
 </html>
