@@ -1,169 +1,204 @@
-:root{
-  --bg: #fbf4e6;
-  --ink: #2a241a;
+/* ===========================
+   HOTH MOCK — style.css
+   - Scrollable page
+   - Fixed honeycomb background (iOS-safe)
+   - Seal + hero do NOT overlap
+   - Product images normalized + framed
+   =========================== */
 
-  --max: 980px;
+:root{
+  --bg: #fbf3e6;         /* warm paper */
+  --ink: #2a241c;        /* soft dark */
+  --muted: rgba(42,36,28,.72);
+
+  --card: rgba(255,255,255,.78);
+  --cardEdge: rgba(168,140,78,.35);
+
+  --shadow: 0 14px 30px rgba(0,0,0,.12);
   --radius: 22px;
 
-  /* background prominence */
-  --combOpacity: .34;
-  --combSaturate: 1.16;
-  --combContrast: 1.04;
-
-  --shadow: 0 14px 34px rgba(0,0,0,.14);
-  --shadow2: 0 10px 22px rgba(0,0,0,.12);
+  /* honeycomb texture control */
+  --hcombOpacity: .22;   /* increase slightly for prominence */
+  --hcombSaturate: 1.15; /* a touch more saturation */
+  --hcombContrast: 1.06;
+  --hcombBlur: 0px;      /* keep crisp */
 }
 
-*{ box-sizing:border-box; }
-html, body{ height:100%; }
+/* Basic reset */
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
 body{
-  margin:0;
+  margin: 0;
   color: var(--ink);
   background: var(--bg);
-  font-family: ui-serif, Georgia, "Times New Roman", serif;
-  overflow-x:hidden;
+  font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+  line-height: 1.35;
+  overflow-x: hidden;
 }
 
-/* FIXED honeycomb background */
+/* Fixed background layer (does NOT scroll) */
 body::before{
   content:"";
   position: fixed;
   inset: 0;
-  background-image: url("./hcomb-bg.PNG");
+  z-index: -2;
+  background-image: url("hcomb-bg.PNG");
   background-repeat: repeat;
-  background-size: 520px;
-  background-position: center;
-  opacity: var(--combOpacity);
-  filter: saturate(var(--combSaturate)) contrast(var(--combContrast));
-  pointer-events:none;
-  z-index:-2;
+  background-size: 520px auto; /* adjust for scale */
+  opacity: var(--hcombOpacity);
+  filter: saturate(var(--hcombSaturate)) contrast(var(--hcombContrast)) blur(var(--hcombBlur));
+  pointer-events: none;
 }
 
-/* readability veil */
+/* Optional soft vignette / warmth */
 body::after{
   content:"";
   position: fixed;
   inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
-    radial-gradient(120% 85% at 50% 0%, rgba(255,255,255,.55), transparent 62%),
-    radial-gradient(110% 95% at 50% 100%, rgba(255,255,255,.45), transparent 65%),
-    radial-gradient(90% 60% at 50% 50%, transparent 55%, rgba(0,0,0,.08) 100%);
-  pointer-events:none;
-  z-index:-1;
+    radial-gradient(1200px 700px at 50% 10%, rgba(255,220,140,.22), transparent 60%),
+    radial-gradient(900px 700px at 50% 90%, rgba(120,90,30,.08), transparent 60%);
 }
 
-.wrap{
-  width: min(var(--max), calc(100% - 28px));
-  margin: 22px auto 60px;
+/* Page width control */
+.site-header,
+.hero,
+.intro,
+.products,
+.site-footer{
+  width: min(980px, calc(100% - 36px));
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* top seal */
-.brand{
-  display:flex;
-  justify-content:center;
-  padding: 18px 0 6px;
-}
-.brand img{
-  width: min(360px, 78vw); /* smaller than before */
-  height:auto;
-  display:block;
-  filter: drop-shadow(0 16px 22px rgba(0,0,0,.16));
+/* Header seal (no overlap) */
+.site-header{
+  padding: 24px 0 10px;
+  text-align: center;
 }
 
-/* hero */
+.site-seal{
+  display: inline-block;
+  width: clamp(170px, 38vw, 280px);
+  height: auto;
+  max-width: 100%;
+  image-rendering: auto;
+}
+
+/* Hero banner */
 .hero{
-  margin: 16px auto 18px;
-  border-radius: 24px;
-  overflow:hidden;
+  padding: 10px 0 0;
+}
+
+.hero-image{
+  display: block;
+  width: 100%;
+  height: clamp(170px, 32vw, 300px);
+  object-fit: cover;
+  border-radius: 26px;
   box-shadow: var(--shadow);
-}
-.hero img{
-  width:100%;
-  height:auto;
-  display:block;
+  border: 1px solid rgba(0,0,0,.06);
 }
 
-/* intro */
-.lead{
-  margin: 18px auto 26px;
-  padding: 22px 18px;
-  border-radius: 24px;
-  background: rgba(255,255,255,.72);
-  box-shadow: var(--shadow2);
-  border: 1px solid rgba(152,120,38,.14);
-  text-align:center;
-}
-.lead p{
-  margin:0;
-  font-size: clamp(18px, 2.1vw, 24px);
-  line-height: 1.55;
-  color: rgba(42,36,26,.86);
+/* Intro text */
+.intro{
+  padding: 18px 8px 6px;
+  text-align: center;
+  font-size: clamp(18px, 3.8vw, 26px);
+  color: var(--ink);
 }
 
-/* grid */
-.grid{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
+.intro p{
+  margin: 0 auto;
+  max-width: 34ch;
+  padding: 14px 16px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(168,140,78,.22);
+  border-radius: 18px;
+  box-shadow: 0 10px 20px rgba(0,0,0,.07);
+  backdrop-filter: blur(6px);
+}
+
+/* Products grid */
+.products{
+  padding: 18px 0 34px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
-@media (max-width: 940px){
-  .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-}
-@media (max-width: 620px){
-  .grid{ grid-template-columns: 1fr; }
+
+@media (min-width: 820px){
+  .products{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-/* card */
-.card{
-  padding: 14px;
-  border-radius: 22px;
-  background: rgba(255,255,255,.68);
-  border: 1px solid rgba(152,120,38,.14);
-  box-shadow: var(--shadow2);
+.product-card{
+  background: var(--card);
+  border: 1px solid var(--cardEdge);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 14px 16px;
+  text-align: center;
+  backdrop-filter: blur(7px);
 }
 
-/* ---------- PRODUCT IMAGE (SANE SIZING) ---------- */
-.frame{
+/* Image frame container */
+.imgframe{
   position: relative;
-  width: 100%;
-  max-width: 330px;          /* keeps images from becoming gigantic */
-  margin: 0 auto;            /* centers in card */
-  border-radius: 22px;
-  overflow: hidden;
+  border-radius: 18px;
+  padding: 10px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.55));
+  border: 1px solid rgba(168,140,78,.30);
+  box-shadow: 0 10px 18px rgba(0,0,0,.10) inset;
 }
 
-/* actual product image */
-.frame img.product{
+/* Product image sizing fix (prevents "gigantic") */
+.imgframe img{
+  display: block;
   width: 100%;
   height: auto;
-  display:block;
-  border-radius: 22px;
-  background:#fff;
-  box-shadow: 0 10px 18px rgba(0,0,0,.10);
+  max-height: 220px;
+  object-fit: contain;
+  background: rgba(255,255,255,.92);
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.10);
 }
 
-/* decorative frame overlay PNG (you’ll add item-frame.PNG) */
-.frame::after{
+/* Tiny cottagecore corner accents (CSS-only, smooth, not choppy) */
+.imgframe::before{
+  content:"";
+  position: absolute;
+  inset: 8px;
+  border-radius: 14px;
+  pointer-events: none;
+  border: 2px solid rgba(168,140,78,.22);
+}
+
+/* Real filigree frame overlay (root file: item-frame.PNG) */
+.imgframe::after{
   content:"";
   position:absolute;
-  inset: 0;
-  background-image: url("./item-frame.PNG"); /* add to root */
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  inset: 2px;                 /* slight inset so it hugs nicely */
   pointer-events:none;
-  opacity: .98;
+  border-radius: 18px;
+  background: url("item-frame.PNG") center/contain no-repeat;
+  opacity: .92;               /* tune 0.85–1.0 */
+  filter: saturate(1.05);
+}
+/* Product titles */
+.product-card h3{
+  margin: 12px 0 0;
+  font-size: 20px;
+  letter-spacing: .3px;
+  color: var(--ink);
 }
 
-/* title */
-.card h3{
-  margin: 12px 6px 0;
-  text-align:center;
-  font-size: 22px;
-  font-weight: 650;
-}
-.card .meta{
-  margin: 6px 6px 0;
-  text-align:center;
-  color: rgba(42,36,26,.70);
+/* Footer */
+.site-footer{
+  padding: 18px 0 30px;
+  text-align: center;
+  color: var(--muted);
   font-size: 14px;
 }
